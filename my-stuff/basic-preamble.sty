@@ -1,0 +1,312 @@
+\ProvidesPackage{my-stuff/basic-preamble}
+
+%% * Require Packages * %% 
+%  ********************  %
+
+% Because BibLaTeX asked for it
+\RequirePackage{csquotes}
+
+\RequirePackage[T1]{fontenc}
+% \RequirePackage[utf8]{inputenc}
+\RequirePackage{lmodern}
+\RequirePackage[english]{babel}
+
+% Traditional
+\RequirePackage{enumerate}
+
+% AMS stuff
+\RequirePackage{amsthm}
+\RequirePackage[mathcal]{euscript}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb, amsmath}
+\RequirePackage{mathrsfs} %fontes p/ conjuntos, letras trabalhadas
+
+% Diagramas
+\RequirePackage{tikz}
+\usetikzlibrary{matrix,arrows}
+\usetikzlibrary{cd}
+
+\RequirePackage[cmtip,all]{xy}
+\RequirePackage{graphicx}
+
+% screeches letters to avoid hbox underfull
+\RequirePackage{microtype}
+
+% if then
+\RequirePackage{xstring}
+
+% * References (they must be called in this order)
+\RequirePackage[hypertexnames=false]{hyperref}
+\RequirePackage[capitalise,noabbrev]{cleveref}
+% ** The next two commands are to remove a strange warning from using autonum
+\expandafter\def\csname ver@etex.sty\endcsname{3000/12/31}
+\let\globcount\newcount
+\RequirePackage{autonum}
+
+% ** for some reason, subsections don't work with cref out of the box
+\crefname{subsection}{Subsection}{Subsections}  
+\Crefname{subsection}{Subsection}{Subsections}
+
+% I was using
+% \mathtoolsset{showonlyrefs}
+% before using autonum, but it is incompatible with cleverref
+% On the other hand, autonum breaks all starred environments because they are "useless".
+% This causes many errors since it is incompatible with old files.
+% Below is a attempt to correct it:
+
+\makeatletter
+\newcommand{\restore@Environment}[1]{%
+  \AtBeginDocument{%
+    \csletcs{#1*}{#1}%
+    \csletcs{end#1*}{end#1}%
+  }%
+}
+\forcsvlist\restore@Environment{alignat,equation,gather,multline,flalign,align}
+\makeatother
+
+
+
+%%%       Theorem Styles       %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Equations also numbered by section
+\numberwithin{equation}{chapter}
+
+\crefname{thm}{Theorem}{Theorems}
+\crefname{theorem}{Theorem}{Theorems}
+
+\crefname{lemma}{Lemma}{Lemmas}
+
+\crefname{prop}{Proposition}{Propositions}
+\crefname{proposition}{Proposition}{Propositions}
+
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{corollary}{Corollary}{Corollaries}
+
+\crefname{ex}{Example}{Examples}
+\crefname{example}{Example}{Examples}
+
+\crefname{defi}{Definition}{Definitions}
+\crefname{definition}{Definition}{Definitions}
+
+\crefname{rmk}{Remark}{Remarks}
+\crefname{remark}{Remark}{Remarks}
+
+\crefname{notation}{Notation}{Notations}
+
+\crefname{convention}{Convention}{Conventions}
+
+\crefname{claim}{Claim}{Claims}
+
+
+\theoremstyle{plain} % Thms, props, cors and lemmas
+
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{theorem}[thm]{Theorem}
+
+\newtheorem{lemma}[thm]{Lemma}
+
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{proposition}[thm]{Proposition}
+
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{corollary}[thm]{Corollary}
+
+\theoremstyle{definition}
+
+\newtheorem{ex}[thm]{Example}
+\newtheorem{example}[thm]{Example}
+
+\newtheorem{defi}[thm]{Definition}
+\newtheorem{definition}[thm]{Definition}
+
+\theoremstyle{remark}
+
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{remark}[thm]{Remark}
+
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{convention}[thm]{Convention}
+\newtheorem{claim}{Claim}
+\newtheorem*{claim*}{Claim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%        New Commands        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Character group
+\newcommand{\dual}{\widehat}
+
+% Descending chain condition
+\newcommand{\dcc}{d.c.c.~}
+\newcommand{\IFF}{if, and only if, }
+
+% Colon for maps
+\newcommand{\from}{\colon}
+
+% Latin abbreviations
+\newcommand{\ie}{\text{i.e.}}
+\newcommand{\eg}{\text{e.g.}}
+
+% Functions
+\newcommand{\fc}[2]{\colon #1 \rightarrow #2}
+
+% "and" in the middle of Math-mode
+\newcommand{\AND}{\ensuremath{\,\text{and}\,}}
+
+% General Math
+\newcommand{\abs}[1]{\mathopen|#1\mathclose|}
+\newcommand{\ann}{\operatorname{ann}}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\iso}{\simeq}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\vphi}{\varphi}
+
+% Tensor product
+\newcommand{\tensor}{\otimes}
+\newcommand{\Exterior}{\mathchoice{{\textstyle\bigwedge}}%
+    {{\bigwedge}}%
+    {{\textstyle\wedge}}%
+    {{\scriptstyle\wedge}}}
+
+% Gradings
+\newcommand{\Star}{^\star}
+
+% Field "F"
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\Char}{\operatorname{char}}
+
+% Common sets
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+% Bold matrices
+\newcommand{\M}{M}
+
+% Calligraphic letters
+\newcommand{\mc}[1]{\mathcal #1}
+\newcommand{\U}{\mathcal U}
+\newcommand{\V}{\mathcal V}
+\newcommand{\B}{\mathcal B}
+
+% Quotients of Z
+\newcommand{\Zmod}[1]{\ensuremath{\mathbb{Z}_{#1}}}
+
+% Matrices
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\op}{^{\mathrm{op}}}
+\newcommand{\sop}{^{\mathrm{sop}}}
+\newcommand{\Span}{\operatorname{span}}
+
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\transp}{\ensuremath{^{\top}}}
+\newcommand{\eval}[1]{\ensuremath{\langle #1 \rangle}}
+
+\newcommand{\stransp}{\ensuremath{^{s\top}}}
+\newcommand{\sT}{\ensuremath{^{s\top}}}
+
+% groups
+
+\newcommand{\pmone}{\{ \pm 1 \}}
+
+% Lie algebras
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\Sl}{\mathfrak{sl}}
+\newcommand{\Gl}{\mathfrak{Gl}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\osp}{\mathfrak{osp}}
+
+
+\newcommand{\frg}{\mathfrak{g}}
+\newcommand{\frr}{\mathfrak{r}}
+\newcommand{\frs}{\mathfrak{s}}
+
+\newcommand{\Skew}{\operatorname{Skew}}
+
+% Lie superalgebras
+\newcommand{\even}{^{\bar0}}
+\newcommand{\odd}{^{\bar1}}
+
+\newcommand{\subeven}{_{\bar0}}
+\newcommand{\subodd}{_{\bar1}}
+
+\newcommand{\bz}{{\bar{0}}}
+\newcommand{\bo}{{\bar{1}}}
+
+\newcommand{\str}{\operatorname{str}}
+\newcommand{\Str}{\operatorname{str}}
+\newcommand{\rank}{\operatorname{rank}}
+
+
+\newcommand{\Lie}[1]{\ensuremath{L^{\bar{#1}}}}
+\newcommand{\A}[1]{\ensuremath{A^{\bar{#1}}}}
+
+\newcommand{\sign}[2]{\ensuremath{(-1)^{|#1||#2|}}}
+
+% For Q(n)
+\newcommand\munderbar[1]{\underaccent{\bar}{#1}}
+\newcommand{\trl}{\sharp}
+
+% Gradings
+\newcommand{\gr}{\text{gr}}
+\newcommand{\D}{\ensuremath{\mathcal{D}}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\wt}{\mathcal}
+
+% Automorphisms
+\newcommand{\Inn}{\operatorname{Inn}}
+
+% Superconjugation
+\newcommand{\sconj}{\operatorname{sconj}}
+
+\newcommand{\ideal}{\vartriangleleft}
+
+% Comments with "\tmp"
+\newcommand{\tmp}[1]{\tt #1}
+
+% bar vs overline
+
+\newcommand{\barr}[1]{%
+    \IfEqCase{#1}{%
+        {\Gamma}{\overline #1}%
+        {\D}{\overline #1}%
+        {G}{\overline #1}%
+        {T}{\overline #1}%
+        {R}{\overline #1}
+        {S}{\overline #1}
+        {\beta^+}{\overline {#1}}
+        {T^+}{\overline {#1}}%
+        {T^{[2]}}{\overline {#1}}%
+        {T_{[2]}}{\overline {#1}}%
+        {\U}{\overline {#1}}%
+    }[\bar #1] %else
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% TO-DO Lists %%
+
+\RequirePackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\done}{\rlap{\raisebox{1pt}{\large\hspace{-5pt}\cmark}}}
+
+\newcommand{\cancel}{\rlap{\raisebox{0pt}{\large\hspace{-5pt}\xmark}}}
+%\newcommand{\donebox}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+% end checklist
+
+\newcommand{\Eex}{E^{\mathrm{ex}}}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\bi}{\mathbf{i}}

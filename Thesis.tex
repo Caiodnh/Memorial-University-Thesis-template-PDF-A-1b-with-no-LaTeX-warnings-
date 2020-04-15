@@ -1,0 +1,83 @@
+% ------------------ %
+% * DOCUMENT CLASS * %
+% ------------------ %
+
+\documentclass[12pt]{pdfathesis}
+
+%%%% Of course, if you want to format you entire thesis
+%%%% you can use another document class. In such a case
+%%%% you need to use the `\usepackage{pdfathesis}' command
+%%%% instead. ie, replace the command before and uncomment
+%%%% the following line
+%\usepackage{pdfathesis}
+%
+
+% ----------------- %
+% * YOUR PREAMBLE * %
+% ----------------- %
+
+%%%% Include all packages that you need.
+
+%%%% Many of the basic math packages/macros are in the next file
+%% You can replace it by your own file and or add your preferred packages/macros here
+
+\usepackage{my-stuff/basic-preamble}
+
+%%%% The next package is useful when editing your thesis, it prints the labels of definitions/theorems on the right margin of the pdf.
+%% You should comment it out for the final version
+\usepackage{showlabels}
+
+%% the next line include the MinonPro fonts for pdfLaTeX; 
+%% you may not have them or not need them.
+% \ifpdf\usepackage{MinionPro}\pdfmapfile{+MinionPro.map}\fi 
+%% Do not include unnecessary packages (inclusion of packages 
+%% that you no use just makes documents hard to debug)
+
+% -------------------- %
+% * PDF-A's PREAMBLE * %
+% -------------------- %
+
+%%%% To not clutter this file too much, I put this in other file
+%%%% There are things that go in the front page, like the Title and Student's and Supervisor's name
+
+\input{pdfathesis-stuff/preamble}
+
+% ------------------ %
+% * BEGIN DOCUMENT * %
+% ------------------ %
+
+\begin{document}
+
+% -------------- %
+% * PREFACTORY * %
+% -------------- %
+
+%%%% In the next file, we have the stuff that comes before the actual work: 
+%%%% Abstract, Lay Summary, Acknowledgments, Statement of Contribution and Table of Contents.
+
+\include{pdfathesis-stuff/prefactory}
+
+% ---------------- %
+% * ACTUAL WORK *  %
+% ---------------- %
+
+%%%% You could type it here, or divide in files the way you prefer
+%%%% In this template, I have separate files for it chapter, in the corresponding folder
+
+%%  '\doublespacing' should only be used for review/draft
+%\doublespacing  %% comment this command for the final submission
+
+\include{chapters/00}
+\include{chapters/01}
+
+% ----------------- %
+% * BIBLIOGRAPHY *  %
+% ----------------- %
+
+%%%% Use the method and style you prefer. 
+%%%% Here we are using BibTeX with amsalpha. 
+
+\bibliographystyle{amsalpha}
+\bibliography{my-stuff/bibliography}
+
+\end{document}
