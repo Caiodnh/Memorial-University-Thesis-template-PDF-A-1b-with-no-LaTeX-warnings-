@@ -9,7 +9,6 @@
 
 %\usepackage{pdfathesis}
 
-
 % ----------------- %
 % * YOUR PREAMBLE * %
 % ----------------- %
@@ -25,12 +24,6 @@
 %% You should comment it out for the final version
 \usepackage{showlabels}
 
-%% the next line include the MinonPro fonts for pdfLaTeX; 
-%% you may not have them or not need them.
-% \ifpdf\usepackage{MinionPro}\pdfmapfile{+MinionPro.map}\fi 
-%% Do not include unnecessary packages (inclusion of packages 
-%% that you no use just makes documents hard to debug)
-
 % -------------------- %
 % * PDF-A's PREAMBLE * %
 % -------------------- %
@@ -39,6 +32,23 @@
 %%%% There you put things like the Title and Student's and Supervisor's name, that go in the front page.
 
 \input{pdfathesis-stuff/preamble}
+
+% ----------------------------------- %
+% * ADDITIONAL PREAMBLE DEFINITIONS * %
+% ----------------------------------- %
+
+%%%% These were in JC's original file, and I decided to keep because I don't know how important they are:
+
+\setlength{\parskip}{6pt}
+
+%% If you do not know what a colorspace profile is, leave next macro alone
+%\ColorspaceProfile{file}{profile description}{number of components}
+
+%% the next line include the MinonPro fonts for pdfLaTeX; 
+%% you may not have them or not need them.
+% \ifpdf\usepackage{MinionPro}\pdfmapfile{+MinionPro.map}\fi 
+%% Do not include unnecessary packages (inclusion of packages 
+%% that you no use just makes documents hard to debug)
 
 % ------------------ %
 % * BEGIN DOCUMENT * %
@@ -50,8 +60,8 @@
 % * PREFACTORY * %
 % -------------- %
 
-%%%% In the next file, we have the stuff that comes before the actual work: 
-%%%% Abstract, Lay Summary, Acknowledgments, Statement of Contribution and Table of Contents.
+%%%% In the next file, we have the stuff that comes before the actual work:
+%%% Abstract, Acknowledgments, Table of Contents, etc.
 
 \include{pdfathesis-stuff/prefactory}
 
